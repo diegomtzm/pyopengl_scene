@@ -53,19 +53,26 @@ def main():
 
         # draw models into the scene
         environment()
-        house(translate=(2.8, 1, 0),        scale=(0.75,0.75,0.75), base=(0.639, 1, 0.729),     roof=(0.513, 0.8, 0.584))
-        house(translate=(2.8, -2, -0.1),    scale=(0.75,0.75,0.75), base=(1, 0.670, 0.568),     roof=(1, 0.592, 0.470)) 
-        house(translate=(2.8, -5, -0.3),    scale=(0.75,0.75,0.75), base=(0.466, 0.749, 0.670), roof=(0.372, 0.6, 0.537))
-        house(translate=(2.8, -8, -0.5),    scale=(0.75,0.75,0.75), base=(0.901, 0.647, 0.701), roof=(0.749, 0.541, 0.584))
-        tree(translate=(3.2,1.6,0))
-        tree(translate=(0.6,2.4,0.15))
-        tree(translate=(-2.4,3.3,0.3))
+        house(translate=(2.8, 1, 0), scale=(0.75,0.75,0.75), base=(0.639, 1, 0.729), roof=(0.513, 0.8, 0.584))
+        house(translate=(2.8, -2, -0.1), scale=(0.75,0.75,0.75), base=(1, 0.670, 0.568), roof=(1, 0.592, 0.470)) 
+        house(translate=(2.8, -5, -0.3), scale=(0.75,0.75,0.75), base=(0.466, 0.749, 0.670), roof=(0.372, 0.6, 0.537))
+        house(translate=(2.8, -8, -0.5), scale=(0.75,0.75,0.75), base=(0.901, 0.647, 0.701), roof=(0.749, 0.541, 0.584))
+        trashcan(translate=(3.99,1.8,0), scale=(0.75, 1, 1))
+        stairs(translate=(2.8, -3.1, 0), scale=(0.6, 0.6, 0.6))
+        trashcan(translate=(1.2,2,0.15), scale=(0.75, 1, 1))
+        stairs(translate=(3, -0.6, 0), scale=(0.6, 0.6, 0.6))
+        stairs(translate=(3.7, 2.3, 0), scale=(0.55, 0.55, 0.55))
+        trashcan(translate=(-1.4,2.8,0.3), scale=(0.75, 1, 1))
+        stairs(translate=(3.8, 5, 0), scale=(0.6, 0.6, 0.6))
+        tree(translate=(3.2,1.2,0))
+        tree(translate=(0,2.4,0.15))
+        tree(translate=(-2.5,3.3,0.3))
         car(translate=(-5.8,-3.5,0), scale=(0.75,0.75,0.75), color=(0.64, 0, 0.14))
         car(translate=(-1.8,-3.65,0), scale=(0.75,0.75,0.75), color=(0.17,0.32,0.49))
         car(translate=(2.3,-3.65,0), scale=(0.75,0.75,0.75), color=(0.87, 0.58, 0.24))
-        trashcan(translate=(3.99,1.8,0))
-        trashcan(translate=(1.2,2.6,0.15))
-        trashcan(translate=(-1.9,3.5,0.3))
+        
+        
+        
         
         # Updates the window with the active buffer contents
         pg.display.flip()
