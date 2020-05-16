@@ -21,15 +21,43 @@ f_facade  = [tuple(map(lambda x: x + 14, y)) for y in f_base]
 f_base2   = [tuple(map(lambda x: x + 14, y)) for y in f_facade]
 f_ceil    = [(42, 43, 45, 44), (42, 43, 47, 46), (47, 46, 44, 45), (42, 44, 46), (43, 45, 47)]
 
-print(f_base2)
-
-houseFaces = f_base + f_facade + f_base2 + f_ceil
-
 # Function to draw the house
-def house():
-    glBegin(GL_QUADS)
-    for houseQuad in houseFaces:
-        for houseVertex in houseQuad:
-            glVertex3fv(houseVerts[houseVertex])
+def house(translate=(0,0,0), scale=(1,1,1), base=(0,0,1), roof=(0,0,0)):
+    glPushMatrix()
+    glRotate(-90,1,0,0)
+    glRotate(90,0,0,1)
+    glTranslate(translate[0],translate[1],translate[2])
+    glScale(scale[0], scale[1], scale[2])
+
+    # House Base
+    glBegin(GL_POLYGON)
+    glColor3fv(base)
+    for base_face in f_base:
+        for v in base_face:
+            glVertex3fv(houseVerts[v])
     glEnd()
-    
+
+    # House Facade
+    glBegin(GL_POLYGON)
+    glColor3fv((1, 1, 1))
+    for facade_face in f_facade:
+        for v in facade_face:
+            glVertex3fv(houseVerts[v])
+    glEnd()
+
+    # House Base 2
+    glBegin(GL_POLYGON)
+    glColor3fv(base)
+    for base2_face in f_base2:
+        for v in base2_face:
+            glVertex3fv(houseVerts[v])
+    glEnd()
+
+    # House Roof
+    glBegin(GL_POLYGON)
+    glColor3fv(roof)
+    for ceil_face in f_ceil:
+        for v in ceil_face:
+            glVertex3fv(houseVerts[v])
+    glEnd()
+    glPopMatrix()
