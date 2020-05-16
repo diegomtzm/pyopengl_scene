@@ -6,6 +6,7 @@ from models.house import *
 from models.car import *
 from models.environment import *
 from models.stairs import *
+from models.trashcan import *
 
 def main():
     # initialization of the pygame modules
@@ -58,6 +59,9 @@ def main():
         car(translate=(-5.8,-3.5,0), scale=(0.75,0.75,0.75), color=(0.64, 0, 0.14))
         car(translate=(-1.8,-3.65,0), scale=(0.75,0.75,0.75), color=(0.17,0.32,0.49))
         car(translate=(2.3,-3.65,0), scale=(0.75,0.75,0.75), color=(0.87, 0.58, 0.24))
+        trashcan(translate=(3.99,1.8,0))
+        trashcan(translate=(1.2,2.6,0.15))
+        trashcan(translate=(-1.9,3.5,0.3))
         
         # Updates the window with the active buffer contents
         pg.display.flip()
