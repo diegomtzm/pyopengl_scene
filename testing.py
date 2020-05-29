@@ -1,7 +1,7 @@
 import pygame as pg
 from pygame.locals import *
 
-from models.car import *
+from models.environment import *
 
 def main():
     # initialization of the pygame modules
@@ -47,7 +47,7 @@ def main():
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 
         # draw models into the scene
-        car()
+        environment()
 
         # Updates the window with the active buffer contents
         pg.display.flip()

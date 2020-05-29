@@ -1,5 +1,6 @@
 from OpenGL.GL import *
 from OpenGL.GLU import *
+from models.texture import *
 
 # tree vertex
 tronco = [(0,0,0), (0,0.1,0), (0.1,0.1,0), (0.1,0,0), (0,0,0.75), (0,0.1,0.75), (0.1,0.1,0.75), (0.1,0,0.75)]
@@ -20,6 +21,10 @@ copasFaces = f_copa1 + f_copa2 + f_copa3
 def tree(translate=(0,0,0), rotate=(0,0,0), scale=(1,1,1)):
     # Push an pop matrix to apply transformations only to this object
     glPushMatrix()
+    texture_id = read_texture('textures/tree/tree.jpg')
+    glEnable(GL_TEXTURE_2D)
+    glBindTexture(GL_TEXTURE_2D, texture_id)
+
     glRotate(-90,1,0,0)
     glRotate(10,0,0,1)
     glTranslate(translate[0],translate[1],translate[2])
@@ -27,14 +32,62 @@ def tree(translate=(0,0,0), rotate=(0,0,0), scale=(1,1,1)):
     
     glBegin(GL_QUADS)
     # set the color for the trunk
-    glColor3fv((0.31,0.21,0.09))
+    # glColor3fv((0.31,0.21,0.09))
     for troncoQuad in f_tronco:
+        n = 0
         for troncoVertex in troncoQuad:
-            glVertex3fv(tronco[troncoVertex])
-    glColor3fv((0.28,0.41,0.11))
-    for copasQuad in copasFaces:
-        for copasVertex in copasQuad:
-            glVertex3fv(treeVerts[copasVertex])
+            if n == 0:
+                xv = 0.0
+                yv = 0.0
+            if n == 1:
+                xv = 1.0
+                yv = 0.0
+            if n == 2:
+                xv = 1.0
+                yv = 1.0
+            if n == 3:
+                xv = 0.0
+                yv = 1.0
+            glTexCoord2f(xv,yv); glVertex3fv(tronco[troncoVertex])
+            n += 1
     glEnd()
+
+    glDisable(GL_TEXTURE_2D)
+
+    glPopMatrix()
+
+    glPushMatrix()
+    texture_id = read_texture('textures/tree/leaves.jpg')
+    glEnable(GL_TEXTURE_2D)
+    glBindTexture(GL_TEXTURE_2D, texture_id)
+
+    glRotate(-90,1,0,0)
+    glRotate(10,0,0,1)
+    glTranslate(translate[0],translate[1],translate[2])
+    glScale(scale[0], scale[1], scale[2])
+    
+    glBegin(GL_QUADS)
+    # set the color for the trunk
+     # glColor3fv((0.28,0.41,0.11))
+    for copasQuad in copasFaces:
+        n = 0
+        for copasVertex in copasQuad:
+            if n == 0:
+                xv = 0.0
+                yv = 0.0
+            if n == 1:
+                xv = 1.0
+                yv = 0.0
+            if n == 2:
+                xv = 1.0
+                yv = 1.0
+            if n == 3:
+                xv = 0.0
+                yv = 1.0
+            glTexCoord2f(xv,yv); glVertex3fv(treeVerts[copasVertex])
+            n += 1
+    glEnd()
+
+    glDisable(GL_TEXTURE_2D)
 
     glPopMatrix()

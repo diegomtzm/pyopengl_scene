@@ -1,5 +1,6 @@
 from OpenGL.GL import *
 from OpenGL.GLU import *
+from models.texture import *
 
 # car vertex
 car_v = [(0,0,0),(0,0,0.7),(0.5,0,0.7),(0.75,0,1.2),(1.75,0,1.2),(1.75,0,0.7),(2.5,0,0.7),(2.5,0,0),
@@ -26,8 +27,13 @@ carFaces = car_f_pol + car_f_quad + wheels_f + wheels_f_2
 colors = [(0,0,1), (0,1,0), (1,0,0), (1,0,1), (0,1,1), (1,1,0), (1,1,1), (0,0,0)]
 
 # Function to draw the car
-def car(translate=(0,0,0), scale=(1,1,1), color=(0,0,1)):
+def car(translate=(0,0,0), scale=(1,1,1), color=(0,0,1), texture='red'):
     glPushMatrix()
+
+    texture_id = read_texture('textures/car/tire.jpg')
+    glEnable(GL_TEXTURE_2D)
+    glBindTexture(GL_TEXTURE_2D, texture_id)
+
     glRotate(-95, 1, 0, 0)
     glRotate(4,0,1,0)
     glScale(scale[0], scale[1], scale[2])
@@ -36,41 +42,177 @@ def car(translate=(0,0,0), scale=(1,1,1), color=(0,0,1)):
     glBegin(GL_QUADS)
     glColor3fv((0,0,0))
     for wheelQuad in wheels_f_2:
+        n = 0
         for wheelVertex in wheelQuad:
-            glVertex3fv(carVerts[wheelVertex])
+            if n == 0:
+                xv = 0.0
+                yv = 0.0
+            if n == 1:
+                xv = 1.0
+                yv = 0.0
+            if n == 2:
+                xv = 1.0
+                yv = 1.0
+            if n == 3:
+                xv = 0.0
+                yv = 1.0
+            glTexCoord2f(xv,yv); glVertex3fv(carVerts[wheelVertex])
+            n += 1
     glEnd()
+
+    glPopMatrix()
+
+    glPushMatrix()
+    imgPath = 'textures/car/' + texture + '.jpg'
+    texture_id = read_texture(imgPath)
+    glEnable(GL_TEXTURE_2D)
+    glBindTexture(GL_TEXTURE_2D, texture_id)
+
+    glRotate(-95, 1, 0, 0)
+    glRotate(4,0,1,0)
+    glScale(scale[0], scale[1], scale[2])
+    glTranslate(translate[0], translate[1], translate[2])
 
     glBegin(GL_POLYGON)
     glColor3fv(color)
+    n = 0
     for carVertex in car_f_pol[1]:
-        glVertex3fv(carVerts[carVertex])
+        if n == 0:
+            xv = 0.0
+            yv = 0.0
+        if n == 1:
+            xv = 1.0
+            yv = 0.0
+        if n == 2:
+            xv = 1.0
+            yv = 1.0
+        if n == 3:
+            xv = 0.0
+            yv = 1.0
+        glTexCoord2f(xv,yv); glVertex3fv(carVerts[carVertex])
+        n += 1
     glEnd()
+
+    glPopMatrix()
+
+    glPushMatrix()
+
+    texture_id = read_texture('textures/car/glass.jpg')
+    glEnable(GL_TEXTURE_2D)
+    glBindTexture(GL_TEXTURE_2D, texture_id)
+
+    glRotate(-95, 1, 0, 0)
+    glRotate(4,0,1,0)
+    glScale(scale[0], scale[1], scale[2])
+    glTranslate(translate[0], translate[1], translate[2])
 
     glBegin(GL_QUADS)
     glColor3fv((0.15,0.15,0.15))
     for glassQuad in car_glass:
+        n = 0
         for glassVertex in glassQuad:
-            glVertex3fv(carVerts[glassVertex])
+            if n == 0:
+                xv = 0.0
+                yv = 0.0
+            if n == 1:
+                xv = 1.0
+                yv = 0.0
+            if n == 2:
+                xv = 1.0
+                yv = 1.0
+            if n == 3:
+                xv = 0.0
+                yv = 1.0
+            glTexCoord2f(xv,yv); glVertex3fv(carVerts[glassVertex])
+            n += 1
     glEnd()
+
+    glPopMatrix()
+
+    glPushMatrix()
+    imgPath = 'textures/car/' + texture + '.jpg'
+    texture_id = read_texture(imgPath)
+    glEnable(GL_TEXTURE_2D)
+    glBindTexture(GL_TEXTURE_2D, texture_id)
+
+    glRotate(-95, 1, 0, 0)
+    glRotate(4,0,1,0)
+    glScale(scale[0], scale[1], scale[2])
+    glTranslate(translate[0], translate[1], translate[2])
 
     glBegin(GL_POLYGON)
     glColor3fv(color)
+    n = 0
     for carVertex in car_f_pol[0]:
-        glVertex3fv(carVerts[carVertex])
+        if n == 0:
+            xv = 0.0
+            yv = 0.0
+        if n == 1:
+            xv = 1.0
+            yv = 0.0
+        if n == 2:
+            xv = 1.0
+            yv = 1.0
+        if n == 3:
+            xv = 0.0
+            yv = 1.0
+        glTexCoord2f(xv,yv); glVertex3fv(carVerts[carVertex])
+        n += 1
     glEnd()
 
     glBegin(GL_QUADS)
     glColor3fv(color)
     for carQuad in car_f_quad:
+        n = 0
         for carVertex in carQuad:
-            glVertex3fv(carVerts[carVertex])
+            if n == 0:
+                xv = 0.0
+                yv = 0.0
+            if n == 1:
+                xv = 1.0
+                yv = 0.0
+            if n == 2:
+                xv = 1.0
+                yv = 1.0
+            if n == 3:
+                xv = 0.0
+                yv = 1.0
+            glTexCoord2f(xv,yv); glVertex3fv(carVerts[carVertex])
+            n += 1
     glEnd()
+
+    glPopMatrix()
+
+    glPushMatrix()
+
+    texture_id = read_texture('textures/car/tire.jpg')
+    glEnable(GL_TEXTURE_2D)
+    glBindTexture(GL_TEXTURE_2D, texture_id)
+
+    glRotate(-95, 1, 0, 0)
+    glRotate(4,0,1,0)
+    glScale(scale[0], scale[1], scale[2])
+    glTranslate(translate[0], translate[1], translate[2])
 
     glBegin(GL_QUADS)
     glColor3fv((0,0,0))
     for wheelQuad in wheels_f:
+        n = 0
         for wheelVertex in wheelQuad:
-            glVertex3fv(carVerts[wheelVertex])
+            if n == 0:
+                xv = 0.0
+                yv = 0.0
+            if n == 1:
+                xv = 1.0
+                yv = 0.0
+            if n == 2:
+                xv = 1.0
+                yv = 1.0
+            if n == 3:
+                xv = 0.0
+                yv = 1.0
+            glTexCoord2f(xv,yv); glVertex3fv(carVerts[wheelVertex])
+            n += 1
     glEnd()
 
     glPopMatrix()
